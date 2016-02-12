@@ -12,8 +12,6 @@
  * @since         0.10.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-
-$cakeDescription = 'CakePHP: the rapid development php framework';
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,37 +19,63 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
-
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('cake.css') ?>
-
+    <?= $this->Html->css(['bootstrap.css', 'bootstrap-theme.css', 'dashboard.css']) ?>
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <nav class="top-bar expanded" data-topbar role="navigation">
-        <ul class="title-area large-3 medium-4 columns">
-            <li class="name">
-                <h1><a href=""><?= $this->fetch('title') ?></a></h1>
-            </li>
-        </ul>
-        <section class="top-bar-section">
-            <ul class="right">
-                <li><a target="_blank" href="http://book.cakephp.org/3.0/">Documentation</a></li>
-                <li><a target="_blank" href="http://api.cakephp.org/3.0/">API</a></li>
-            </ul>
-        </section>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><?= __('CakeAdmin') ?></a>
+        </div>
+        <!-- <div id="navbar" class="navbar-collapse collapse"> -->
+          <!-- <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Dashboard</a></li>
+          </ul> -->
+          <!-- <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form> -->
+        <!-- </div> -->
+      </div>
     </nav>
-    <?= $this->Flash->render() ?>
-    <section class="container clearfix">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <input type="text" class="form-control" id='search-db-name' placeholder="Search">
+            <ul class="nav nav-sidebar" id='sidebar'>
+            <?php foreach ($databases as $database) { ?>
+            <li><?php echo $this->Html->link($database, ['controller' => 'Tables', 'action' => 'tables', $database], ['data-name' => $database]); ?></li> 
+            <?php } ?>
+            </ul>
+        </div>
+        <nav class="navbar col-sm-offset-3 col-md-offset-2">
+          <div class="container-fluid">
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav navbar-left">
+                <!-- <li><a href="#"></a></li> -->
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <?= $this->Flash->render() ?>
         <?= $this->fetch('content') ?>
-    </section>
+        </div>
+      </div>
+    </div>
     <footer>
     </footer>
+    <?= $this->Html->script(['jquery-1.12.0.js', 'bootstrap.js', 'custom.js']) ?>
 </body>
 </html>

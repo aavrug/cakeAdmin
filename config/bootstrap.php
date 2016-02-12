@@ -53,6 +53,7 @@ use Cake\Network\Request;
 use Cake\Routing\DispatcherFactory;
 use Cake\Utility\Inflector;
 use Cake\Utility\Security;
+use Cake\Core\Configure\Engine\IniConfig;
 
 /**
  * Read configuration file and inject configuration into various
@@ -210,3 +211,9 @@ Type::build('date')
 Type::build('datetime')
     ->useImmutable()
     ->useLocaleParser();
+
+/**
+ * Loading dbAdmin config file.
+ */
+Configure::config('ini', new IniConfig());
+Configure::load('dbAdmin', 'ini');

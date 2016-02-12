@@ -16,6 +16,7 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\Core\Configure;
 
 /**
  * Application Controller
@@ -43,6 +44,9 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+
+        $credentials = Configure::read('credentials');
+        mysql_connect('localhost', $credentials['username'], $credentials['password']);        
     }
 
     /**
@@ -58,5 +62,13 @@ class AppController extends Controller
         ) {
             $this->set('_serialize', true);
         }
+
+        $result = mysql_query("SHOW DATABASES");
+        $databases = [];
+        while ($row = mysql_fetch_assoc($result)) {
+            $databases[] = $row['Database']; 
+        }
+
+        $this->set('databases', $databases);
     }
 }

@@ -1,4 +1,4 @@
-# CakePHP Application Skeleton
+<!-- # CakePHP Application Skeleton
 
 [![Build Status](https://img.shields.io/travis/cakephp/app/master.svg?style=flat-square)](https://travis-ci.org/cakephp/app)
 [![License](https://img.shields.io/packagist/l/cakephp/app.svg?style=flat-square)](https://packagist.org/packages/cakephp/app)
@@ -23,4 +23,30 @@ the setup traffic lights.
 ## Configuration
 
 Read and edit `config/app.php` and setup the 'Datasources' and any other
-configuration relevant for your application.
+configuration relevant for your application. -->
+
+# cakeAdmin
+
+Free open source UI for MySQL, released under GPL License
+and powered by [CakePHP 3.0](http://cakephp.org) MVC framework.
+
+## Requirements
+
+* Apache with mod_rewrite
+* PHP 5.4.19 or higher
+* mbstring extension installed
+* mcrypt extension installed
+* intl extension installed
+* fileinfo extension installed
+* Supported database storage engines:
+   * MySQL (5.1.10 or greater)
+
+## Setup Guide
+
+* Clone this repository
+* Install [composer](http://getcomposer.org).
+* Go into the cakeAdmin directory and run `composer install`
+
+## Links
+
+* [GitHub Repo](https://github.com/aavrug/cakeAdmin)
