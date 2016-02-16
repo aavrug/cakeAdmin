@@ -16,6 +16,7 @@ class DatabasesController extends AppController
 {
     public function index()
     {
+        $this->request->session()->delete('Db');
     }
 
     public function add()
@@ -30,13 +31,13 @@ class DatabasesController extends AppController
             }
 
             $dbExist    = 'SHOW DATABASES LIKE "'.$name.'"';
-            $checkExist = mysql_query($dbExist);
+            $checkExist = mysqli_query($this->mysqli, $dbExist);
             if (!empty($name) && $checkExist) {
                 $type    = 'error';
                 $message = "The database name $name already exist.";
             }
             $query = 'CREATE DATABASE '.$name;
-            $result = mysql_query($query);
+            $result = mysqli_query($this->mysqli, $query);
             if (!empty($name) && $result) {
                 $type    = 'success';
                 $message = "The database $name has been successfully created.";

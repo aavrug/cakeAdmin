@@ -1,0 +1,26 @@
+#breadcrumb {
+	background: #E0E0E0;
+	/* Safari 4-5, Chrome 1-9 */
+	background: -webkit-gradient(linear, 0% 100%, 0% 0%, from(rgba(151, 144, 144, 0.72)), to(#FFFFFF));
+	/* Safari 5.1, Chrome 10+ */
+  	background: -webkit-linear-gradient(bottom, rgba(151, 144, 144, 0.72), #FFFFFF);
+  	/* Firefox 3.6+ */
+  	background: -moz-linear-gradient(bottom, rgba(151, 144, 144, 0.72), #FFFFFF);
+  	/* IE 10 */
+  	background: -ms-linear-gradient(bottom, rgba(151, 144, 144, 0.72), #FFFFFF);
+  	/* Opera 11.10+ */
+  	background: -o-linear-gradient(bottom, rgba(151, 144, 144, 0.72), #FFFFFF);
+}
+
+#breadcrumb ul {
+	list-style: none;
+}
+
+#breadcrumb ul li {
+	float: left;
+	padding-bottom: 10px;
+}
+
+#breadcrumb ul li span {
+	color: #8F8F8F;
+}

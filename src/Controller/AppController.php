@@ -29,6 +29,7 @@ use Cake\Core\Configure;
 class AppController extends Controller
 {
 
+    public $mysqli;
     /**
      * Initialization hook method.
      *
@@ -42,11 +43,14 @@ class AppController extends Controller
     {
         parent::initialize();
 
+        Configure::write('Session', [
+            'defaults' => 'php'
+        ]);
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
 
         $credentials = Configure::read('credentials');
-        mysql_connect('localhost', $credentials['username'], $credentials['password']);        
+        $this->mysqli = mysqli_connect('localhost', $credentials['username'], $credentials['password']);        
     }
 
     /**
@@ -62,13 +66,39 @@ class AppController extends Controller
         ) {
             $this->set('_serialize', true);
         }
-
-        $result = mysql_query("SHOW DATABASES");
+        $result = mysqli_query($this->mysqli, "SHOW DATABASES");
         $databases = [];
-        while ($row = mysql_fetch_assoc($result)) {
+        while ($row = mysqli_fetch_assoc($result)) {
             $databases[] = $row['Database']; 
         }
 
         $this->set('databases', $databases);
     }
+
+    /**
+     * Method used output given data in JSON format
+     *
+     * @param array   $data        Data to output in JSON format
+     * @param boolean $jsonHeaders Flag to decide if JSON headers to send or not
+     *
+     * @return void
+     */
+    protected function _sendJson($data, $jsonHeaders = true)
+    {
+        // Set needed variables to use in view
+        $this->set(compact('data', 'jsonHeaders'));
+
+        $this->autoRender = false;
+
+        //IE fix for not cache the request
+        $this->response->disableCache();
+        $this->response->modified('now');
+        $this->response->checkNotModified($this->request);
+
+        $this->response->body(json_encode($data));
+        $this->response->statusCode(200);
+        $this->response->type('application/json');
+
+        return $this->response;
+    }//end _sendJson()
 }

@@ -22,7 +22,7 @@
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
-    <?= $this->Html->css(['bootstrap.css', 'bootstrap-theme.css', 'dashboard.css']) ?>
+    <?= $this->Html->css(['bootstrap.css', 'bootstrap-theme.css', 'dashboard.css', 'custom.css']) ?>
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
@@ -58,6 +58,23 @@
             <li><?php echo $this->Html->link($database, ['controller' => 'Tables', 'action' => 'tables', $database], ['data-name' => $database]); ?></li> 
             <?php } ?>
             </ul>
+        </div>
+        <div class="col-sm-offset-3 col-md-offset-2">
+          <div  id='breadcrumb' class="container-fluid">
+            <div>
+              <ul>
+                <li>>> <span class="glyphicon glyphicon-cd" aria-hidden="true"></span><?php echo $this->Html->link('Home', ['controller' => 'Databases', 'action' => 'index']); ?></li>
+                <?php $dbName = $this->request->session()->read('Db.dbName'); ?>
+                <?php if ($dbName) { ?>
+                <li>>> <span class="glyphicon glyphicon-oil" aria-hidden="true"></span><?php echo $this->Html->link($dbName, ['controller' => 'Tables', 'action' => 'tables_list', $dbName]); ?></li>
+                <?php } ?>
+                <?php $tableName = $this->request->session()->read('Db.tableName'); ?>
+                <?php if ($dbName && $tableName) { ?>
+                <li>>> <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span><?php echo $this->Html->link($tableName, ['controller' => 'Tables', 'action' => 'data', $dbName, $tableName]); ?></li>
+                <?php } ?>
+              </ul>
+            </div>
+          </div>
         </div>
         <nav class="navbar col-sm-offset-3 col-md-offset-2">
           <div class="container-fluid">

@@ -1,4 +1,3 @@
-
 <div class="table-responsive">
 	<?= $this->Form->create('database', ['url' => ['controller' => 'Databases', 'action' => 'add']], ['class' => 'form-horizontal form-bordered']) ?>
         <?php echo $this->Form->label(__('Create Database'), null, ['class' => 'control-label']); ?>
@@ -23,7 +22,7 @@
 		<tbody>
   		<?php foreach ($databases as $database) { ?>
 		<tr>
-			<td><?php echo $this->Html->link($database, ['controller' => 'Tables', 'action' => 'tables', $database], ['data-name' => $database]); ?></td>	
+			<td><?php echo $this->Html->link($database, ['controller' => 'Tables', 'action' => 'tables_list', $database], ['data-name' => $database]); ?></td>	
 		</tr>
 		<?php } ?>
 		</tbody>
